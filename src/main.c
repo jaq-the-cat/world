@@ -8,8 +8,6 @@
 SDL_Window *win;
 SDL_Renderer *rend;
 
-#define PC 100
-
 // initialization
 void init() {
     // Window and renderer
