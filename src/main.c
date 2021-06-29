@@ -14,7 +14,7 @@ void init() {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         fprintf(stderr, "Error initializing SDL: %s\n", SDL_GetError());
     win = SDL_CreateWindow(
-        "Quadtree Collisions",
+        "jaq-the-cat/world",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
         WIDTH, HEIGHT,
