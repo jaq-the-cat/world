@@ -21,7 +21,10 @@ char* loadJson(const char *filename) {
 }
 
 int* loadWorld(const char *filename) {
-    cJSON *item = cJSON_Parse(loadJson(filename));
+    char* json = loadJson(filename);
+    cJSON *item = cJSON_Parse(json);
+    free(json);
+
     cJSON *node = item->child;
 
     int* arr = malloc(sizeof(int)*2*INILEN); // alocate certain size
