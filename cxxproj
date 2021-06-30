@@ -1,8 +1,10 @@
 -SOURCE
 src/*.c
+src/libs/*.c
 
 -COMMANDS
 sdl2-config --libs --cflags
 
 -LIBS
 SDL2_image
+m
