@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "libs/cJSON.h"
+#include "lib/cJSON.h"
 
 #define I(x, y) x*2 + y
 
