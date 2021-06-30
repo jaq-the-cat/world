@@ -52,6 +52,9 @@ void render() {
     SDL_Rect display;
 
     for (int i=1; i<world[I(0, 0)]; i++) {
+
+        printf("%d, %d\n", world[I(i, X)], world[I(i, Y)]);
+
         display.x = world[I(i, X)] - camX;
         display.y = world[I(i, Y)] - camY;
         display.w = 40;

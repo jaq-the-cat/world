@@ -41,7 +41,7 @@ int* loadWorld(const char *filename) {
         node = node->next;
     }
 
-    arr[I(0, 0)] = i+1;
+    arr[I(0, 0)] = i;
     arr = realloc(arr, (i+1) * sizeof(int)*2); // resize arr to fit world size
 
     cJSON_Delete(item);
