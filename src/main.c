@@ -1,14 +1,14 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+#include "loader.h"
+
 #define WIDTH 800
 #define HEIGHT 600
-#define WWIDTH 2000
-#define WHEIGHT 2000
 
 #define BG 200
 
-#define SPD 20
+#define SPD 5
 
 static int camX = 0, camY = 0;
 
@@ -17,6 +17,8 @@ SDL_Renderer *rend;
 
 SDL_Texture *boi;
 
+int *world;
+
 struct {
     char w, a, s, d;
 } keyboard;
@@ -24,13 +26,6 @@ struct {
 // world (get from res/world.json later)
 enum Locs {
     X, Y
-};
-
-int world[][2] = {
-    {0, 0},
-    {50, 50},
-    {100, 100},
-    {0, 200},
 };
 
 // initialization
@@ -48,17 +43,24 @@ void init() {
     IMG_Init(IMG_INIT_PNG);
 
     boi = IMG_LoadTexture(rend, "res/boi.png");
+
+    world = loadWorld("res/world.json");
 }
 
 // rendering
 void render() {
     SDL_Rect display;
-    for (int i=0; i<4; i++) {
-        display.x = world[i][X] - camX;
-        display.y = world[i][Y] - camY;
+
+    for (int i=1; i<world[I(0, 0)]; i++) {
+        display.x = world[I(i, X)] - camX;
+        display.y = world[I(i, Y)] - camY;
         display.w = 40;
         display.h = 40;
-        SDL_RenderCopy(rend, boi, NULL, &display);
+
+        if (display.x+display.w >= 0 && display.x <= WIDTH &&
+        display.y+display.h >= 0 && display.y <= HEIGHT) {
+            SDL_RenderCopy(rend, boi, NULL, &display);
+        }
     }
 }
 
@@ -112,6 +114,7 @@ int main() {
         SDL_RenderPresent(rend);
     }
 
+    free(world);
     SDL_DestroyRenderer(rend);
     SDL_DestroyWindow(win);
     return 0;
