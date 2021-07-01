@@ -59,9 +59,6 @@ void render() {
     SDL_Rect display;
 
     for (int i=0; i<world[0]; i++) {
-
-        printf("%d, %d\n", world[I(i, X)], world[I(i, Y)]);
-
         // set display rectangle to object's (x, y) and a fixed width and height
         display.x = world[I(i, X)] - camX;
         display.y = world[I(i, Y)] - camY;
