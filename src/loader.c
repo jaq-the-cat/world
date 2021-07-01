@@ -27,7 +27,9 @@ int* loadWorld(const char *filename) {
 
     cJSON *node = item->child;
 
-    int* arr = malloc(sizeof(int)*2*INILEN); // alocate certain size
+    // arr is an array of integers, with 2 consecutive indices representing (X, Y) coordinates
+    // and the first index representing the size of the array
+    int* arr = malloc(sizeof(int)*2*INILEN);
 
     int i;
 
@@ -37,7 +39,6 @@ int* loadWorld(const char *filename) {
 
         arr[I(i, 0)] = node->child->valueint; // x
         arr[I(i, 1)] = node->child->next->valueint; // y
-        /*printf("x: %d, y: %d\n", arr[i][0], arr[i][1]);*/
 
         node = node->next;
     }

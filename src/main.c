@@ -23,7 +23,6 @@ struct {
     char w, a, s, d;
 } keyboard;
 
-// world (get from res/world.json later)
 enum Locs {
     X, Y
 };
@@ -47,6 +46,14 @@ void init() {
     world = loadWorld("res/world.json");
 }
 
+void end() {
+    free(world);
+
+    SDL_DestroyTexture(boi);
+    SDL_DestroyRenderer(rend);
+    SDL_DestroyWindow(win);
+}
+
 // rendering
 void render() {
     SDL_Rect display;
@@ -55,13 +62,14 @@ void render() {
 
         printf("%d, %d\n", world[I(i, X)], world[I(i, Y)]);
 
+        // set display rectangle to object's (x, y) and a fixed width and height
         display.x = world[I(i, X)] - camX;
         display.y = world[I(i, Y)] - camY;
-        display.w = 40;
-        display.h = 40;
+        display.w = 25;
+        display.h = 25;
 
         if (display.x+display.w >= 0 && display.x <= WIDTH &&
-        display.y+display.h >= 0 && display.y <= HEIGHT) {
+        display.y+display.h >= 0 && display.y <= HEIGHT) { // if object is actually inside the screen
             SDL_RenderCopy(rend, boi, NULL, &display);
         }
     }
@@ -117,8 +125,7 @@ int main() {
         SDL_RenderPresent(rend);
     }
 
-    free(world);
-    SDL_DestroyRenderer(rend);
-    SDL_DestroyWindow(win);
+    end();
+
     return 0;
 }
