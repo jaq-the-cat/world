@@ -1,18 +1,22 @@
 [
     {
         "x": 0,
-        "y": 0
+        "y": 0,
+        "texture": "res/boi.png"
     },
     {
         "x": 50,
-        "y": 50
+        "y": 50,
+        "texture": "res/boi.png"
     },
     {
         "x": 100,
-        "y": 100
+        "y": 100,
+        "texture": "res/boi.png"
     },
     {
         "x": 150,
-        "y": 150
+        "y": 150,
+        "texture": "res/boi.png"
     }
 ]

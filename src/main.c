@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <string.h>
 
 #include "loader.h"
 
@@ -17,7 +18,8 @@ SDL_Renderer *rend;
 
 SDL_Texture *boi;
 
-int *world;
+object *world;
+int worldSize;
 
 struct {
     char w, a, s, d;
@@ -43,7 +45,13 @@ void init() {
 
     boi = IMG_LoadTexture(rend, "res/boi.png");
 
-    world = loadWorld("res/world.json");
+    world = loadWorld("res/world.json", &worldSize);
+}
+
+SDL_Texture* getTexture(const char *name) {
+    if (strcmp(name, "boi"))
+        return boi;
+    return NULL;
 }
 
 void end() {
@@ -58,16 +66,16 @@ void end() {
 void render() {
     SDL_Rect display;
 
-    for (int i=0; i<world[0]; i++) {
+    for (int i=0; i<worldSize; i++) {
         // set display rectangle to object's (x, y) and a fixed width and height
-        display.x = world[I(i, X)] - camX;
-        display.y = world[I(i, Y)] - camY;
+        display.x = world[i].x - camX;
+        display.y = world[i].y - camY;
         display.w = 25;
         display.h = 25;
 
         if (display.x+display.w >= 0 && display.x <= WIDTH &&
         display.y+display.h >= 0 && display.y <= HEIGHT) { // if object is actually inside the screen
-            SDL_RenderCopy(rend, boi, NULL, &display);
+            SDL_RenderCopy(rend, getTexture(world[i].texture), NULL, &display);
         }
     }
 }

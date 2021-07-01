@@ -20,7 +20,7 @@ char* loadJson(const char *filename) {
     return buffer;
 }
 
-int* loadWorld(const char *filename) {
+object* loadWorld(const char *filename, int *worldSize) {
     char* json = loadJson(filename);
     cJSON *item = cJSON_Parse(json);
     free(json);
@@ -29,22 +29,23 @@ int* loadWorld(const char *filename) {
 
     // arr is an array of integers, with 2 consecutive indices representing (X, Y) coordinates
     // and the first index representing the size of the array
-    int* arr = malloc(sizeof(int)*2*INILEN);
+    object* arr = malloc(sizeof(object)*INILEN);
 
     int i;
 
     for (i=0; node != NULL; i++) {
         if (i >= INILEN)
-            arr = realloc(arr, (int) (INILEN*1.5) * sizeof(int)*2); // resize arr to fit more values
+            arr = realloc(arr, (int) (INILEN*1.5) * sizeof(object)); // resize arr to fit more values
 
-        arr[I(i, 0)] = node->child->valueint; // x
-        arr[I(i, 1)] = node->child->next->valueint; // y
+        arr[i].x       = node->child->valueint; // x
+        arr[i].y       = node->child->next->valueint; // y
+        arr[i].texture = node->child->next->next->valuestring; // texture
 
         node = node->next;
     }
 
-    arr[0] = i;
-    arr = realloc(arr, (i+1) * sizeof(int)*2); // resize arr to fit world size
+    *worldSize = i;
+    arr = realloc(arr, (i) * sizeof(object)); // resize arr to fit world size
 
     cJSON_Delete(item);
 

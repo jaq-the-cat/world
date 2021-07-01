@@ -4,6 +4,9 @@
 
 #include "lib/cJSON.h"
 
-#define I(x, y) x*2 + (y + 1)
+typedef struct {
+    int x, y;
+    char *texture;
+} object;
 
-int* loadWorld(const char *filename);
+object* loadWorld(const char *filename, int *worldSize);
