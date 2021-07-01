@@ -16,7 +16,8 @@ static int camX = 0, camY = 0;
 SDL_Window *win;
 SDL_Renderer *rend;
 
-SDL_Texture *boi;
+SDL_Texture *boi1;
+SDL_Texture *boi2;
 
 object *world;
 int worldSize;
@@ -43,21 +44,25 @@ void init() {
     rend = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     IMG_Init(IMG_INIT_PNG);
 
-    boi = IMG_LoadTexture(rend, "res/boi.png");
+    boi1 = IMG_LoadTexture(rend, "res/boi.png");
+    boi2 = IMG_LoadTexture(rend, "res/boi2.png");
 
     world = loadWorld("res/world.json", &worldSize);
 }
 
 SDL_Texture* getTexture(const char *name) {
-    if (strcmp(name, "boi"))
-        return boi;
+    if (!strcmp(name, "boi"))
+        return boi1;
+    else if (!strcmp(name, "boi2"))
+        return boi2;
     return NULL;
 }
 
 void end() {
     free(world);
 
-    SDL_DestroyTexture(boi);
+    SDL_DestroyTexture(boi1);
+    SDL_DestroyTexture(boi2);
     SDL_DestroyRenderer(rend);
     SDL_DestroyWindow(win);
 }
