@@ -99,14 +99,14 @@ int handleev() {
 
 void update() {
     if (keyboard.w)
-        camY += SPD;
-    if (keyboard.s)
         camY -= SPD;
+    if (keyboard.s)
+        camY += SPD;
 
     if (keyboard.a)
-        camX += SPD;
-    if (keyboard.d)
         camX -= SPD;
+    if (keyboard.d)
+        camX += SPD;
 }
 
 int main() {
