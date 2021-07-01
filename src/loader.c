@@ -30,10 +30,8 @@ int* loadWorld(const char *filename) {
     int* arr = malloc(sizeof(int)*2*INILEN); // alocate certain size
 
     int i;
-    arr[I(0, 0)] = 0; // initialize world length location
-    arr[I(0, 0)] = 0;
 
-    for (i=1; node != NULL; i++) {
+    for (i=0; node != NULL; i++) {
         if (i >= INILEN)
             arr = realloc(arr, (int) (INILEN*1.5) * sizeof(int)*2); // resize arr to fit more values
 
@@ -44,7 +42,7 @@ int* loadWorld(const char *filename) {
         node = node->next;
     }
 
-    arr[I(0, 0)] = i;
+    arr[0] = i;
     arr = realloc(arr, (i+1) * sizeof(int)*2); // resize arr to fit world size
 
     cJSON_Delete(item);

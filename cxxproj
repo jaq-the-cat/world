@@ -1,6 +1,6 @@
 -SOURCE
 src/*.c
-src/libs/*.c
+src/lib/*.c
 
 -COMMANDS
 sdl2-config --libs --cflags

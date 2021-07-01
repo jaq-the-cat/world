@@ -51,7 +51,7 @@ void init() {
 void render() {
     SDL_Rect display;
 
-    for (int i=1; i<world[I(0, 0)]; i++) {
+    for (int i=0; i<world[0]; i++) {
 
         printf("%d, %d\n", world[I(i, X)], world[I(i, Y)]);
 
