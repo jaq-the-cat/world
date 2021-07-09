@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "loader.h"
+#include "textures.h"
 
 #define WIDTH 800
 #define HEIGHT 600
@@ -15,9 +16,6 @@ static int camX = 0, camY = 0;
 
 SDL_Window *win;
 SDL_Renderer *rend;
-
-SDL_Texture *boi1;
-SDL_Texture *boi2;
 
 object *world;
 int worldSize;
@@ -44,25 +42,13 @@ void init() {
     rend = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     IMG_Init(IMG_INIT_PNG);
 
-    boi1 = IMG_LoadTexture(rend, "res/boi.png");
-    boi2 = IMG_LoadTexture(rend, "res/boi2.png");
+    texInit(rend);
 
     world = loadWorld("res/world.json", &worldSize);
 }
 
-SDL_Texture* getTexture(const char *name) {
-    if (!strcmp(name, "boi"))
-        return boi1;
-    else if (!strcmp(name, "boi2"))
-        return boi2;
-    return NULL;
-}
-
 void end() {
     free(world);
-
-    SDL_DestroyTexture(boi1);
-    SDL_DestroyTexture(boi2);
     SDL_DestroyRenderer(rend);
     SDL_DestroyWindow(win);
 }
@@ -78,9 +64,9 @@ void render() {
         display.w = 25;
         display.h = 25;
 
-        if (display.x+display.w >= 0 && display.x <= WIDTH &&
+        if (display.x+display.w >= 0 &&display.x <= WIDTH &&
         display.y+display.h >= 0 && display.y <= HEIGHT) { // if object is actually inside the screen
-            SDL_RenderCopy(rend, getTexture(world[i].texture), NULL, &display);
+            SDL_RenderCopy(rend, texGet(world[i].texture), NULL, &display);
         }
     }
 }

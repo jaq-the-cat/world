@@ -40,11 +40,7 @@ object* loadWorld(const char *filename, int *worldSize) {
 
         arr[i].x       = node->child->valueint; // x
         arr[i].y       = node->child->next->valueint; // y
-
-        arr[i].texture = malloc(sizeof(char)*strlen(node->child->next->next->valuestring));
-        strcpy(arr[i].texture, node->child->next->next->valuestring); // texture
-
-        printf("%s\n", arr[i].texture);
+        arr[i].texture = node->child->next->next->valueint; // texture index
 
         node = node->next;
     }

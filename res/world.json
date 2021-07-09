@@ -2,21 +2,21 @@
     {
         "x": 0,
         "y": 0,
-        "texture": "boi"
+        "texture": 0
     },
     {
         "x": 50,
         "y": 50,
-        "texture": "boi"
+        "texture": 0
     },
     {
         "x": 100,
         "y": 100,
-        "texture": "boi"
+        "texture": 0
     },
     {
         "x": 150,
         "y": 150,
-        "texture": "boi2"
+        "texture": 1
     }
 ]

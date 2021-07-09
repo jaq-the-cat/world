@@ -6,7 +6,7 @@
 
 typedef struct {
     int x, y;
-    char *texture;
+    size_t texture;
 } object;
 
 object* loadWorld(const char *filename, int *worldSize);
